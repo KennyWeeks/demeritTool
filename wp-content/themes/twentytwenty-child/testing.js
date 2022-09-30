@@ -138,7 +138,7 @@ window.addEventListener('load', (e)=>{
 	}*/
 
 	//This is where the switch will be stored
-	switchEl = document.getElementsByClassName("switch-el");
+	/*switchEl = document.getElementsByClassName("switch-el");
 	beforeAfterBlock = document.getElementsByClassName("before-after-switch");
 	galleryImages = document.getElementsByClassName('gallery-images')
 	beforeAfterTag = document.getElementsByClassName("before-after-tag")
@@ -175,6 +175,36 @@ window.addEventListener('load', (e)=>{
 				beforeAfterBlock[j].setAttribute("block-open", 0)
 			}
 		})
+	}*/
+
+	//This section will move the image block in the service section
+	var leftMove = document.getElementById("left-move");
+	var rightMove = document.getElementById("right-move");
+	var insideArea = document.getElementById("inside-area");
+	//Get the width of the inside scrollbar
+	insideStyles = window.getComputedStyle(insideArea);
+	numericValueArea = parseInt(insideStyles.width.substring(0, insideStyles.width.length-2));
+
+	var galleryImages = document.getElementsByClassName("gallery-image");
+	var styleImages = window.getComputedStyle(galleryImages[0]);
+	var numericValueImage = parseInt(styleImages.width.substring(0, styleImages.width.length - 2));
+	var countImages = galleryImages.length - 1;
+	var moveVal = 0;
+	if(leftMove != null && rightMove != null) {
+		leftMove.addEventListener("click", (e)=>{
+			if(moveVal < countImages) {
+				moveVal += 1
+				insideArea.style.marginLeft = "-" + (moveVal * numericValueImage) + "px";
+			}
+		});
+
+		rightMove.addEventListener("click", (e)=>{
+			if(moveVal > 0) {
+				moveVal -= 1
+				insideArea.style.marginLeft = "-" + (moveVal * numericValueImage) + "px";
+			}
+		});
+
 	}
 
 	testBlock = document.getElementById("services");
@@ -199,9 +229,9 @@ window.addEventListener('load', (e)=>{
 
 	progBar = document.getElementById("internal-progress");
 
-	progressIcon = document.getElementById("progress-icon");
+	//progressIcon = document.getElementById("progress-icon");
 
-	progressIconWidth = progressIcon.offsetWidth;
+	//progressIconWidth = progressIcon.offsetWidth;
 
 	window.addEventListener("scroll", (e)=>{
 
@@ -209,13 +239,7 @@ window.addEventListener('load', (e)=>{
 
 		progBar.style.width = perc + "%";
 
-		iconLeft = perc - (100 * progressIconWidth / window.innerWidth);
-
-		console.log(iconLeft);
-		console.log(perc)
-		console.log("------")
-
-		progressIcon.style.left = iconLeft + "%";
+		//progressIcon.style.left = iconLeft + "%";
 
 	});
 

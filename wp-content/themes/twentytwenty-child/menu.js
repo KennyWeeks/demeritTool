@@ -1,7 +1,41 @@
 window.addEventListener("load", ()=>{
 
+	headerInner = document.getElementsByClassName("header-inner")[0];
+	customLogo = document.getElementsByClassName("custom-logo")[0];
+	siteDescription = document.getElementsByClassName("site-description")[0];
 	smallMenu = document.getElementById("small-menu");
 	closeBar = document.getElementById("close-bar");
+	headerTitles = document.getElementsByClassName("header-titles")[0];
+
+	pageProgressBar = document.getElementById('page-progress-bar')
+
+	//this will just work when the screen is in it's mobile mode
+	if(window.innerWidth <= 999) {
+		window.addEventListener("scroll", (e)=>{
+			if(window.scrollY >= 80) {
+				headerInner.style.height = "60px";
+				customLogo.style.width = "40px";
+				customLogo.style.marginTop = "-5px";
+				siteDescription.style.marginTop = "0.2em";
+				headerTitles.style.width = "250px";
+				smallMenu.style.top = "1em";
+				closeBar.style.top = "1em";
+				pageProgressBar.style.top = "60px";
+			} else {
+				headerInner.style.height = "auto";
+				customLogo.style.width = "80px";
+				customLogo.style.marginTop = "0px";
+				siteDescription.style.marginTop = "1.5em";
+				headerTitles.style.width = "290px";
+				smallMenu.style.top = "2.3em";
+				closeBar.style.top = "2.3em";
+				pageProgressBar.style.top = "112px";
+			}
+		});
+	}
+
+	
+	
 
 	callUs = document.getElementById("call-us")
 
@@ -44,7 +78,7 @@ window.addEventListener("load", ()=>{
 				if(e["target"].getAttribute("opened") == 0) {
 					for(var j = 0; j < hiddenBlocks.length; j++) {
 						if(hiddenBlocks[j].getAttribute("parent-block") == 102) {
-							hiddenBlocks[j].style.height = "100px";
+							hiddenBlocks[j].style.height = "50px";
 							openOption[0].style.display = "none";
 							closeOption[0].style.display = "block";
 						}

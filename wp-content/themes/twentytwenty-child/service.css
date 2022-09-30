@@ -93,12 +93,7 @@
 .move-gallery {
 	height: 30px;
 	width: 30px;
-	border: 2px solid #000;
 	top: 55%;
-}
-
-.move-gallery:hover {
-	background-color: #000000;
 }
 
 #left-move {
@@ -106,28 +101,33 @@
 	left: 1%;
 }
 
+#left-move > img {
+	transform: rotate(180deg);
+	margin-left: 10%;
+}
+
 #right-move {
 	position: absolute;
 	right: 1%;
 }
 
-#image-area {
-	width: 92%;
-	height: 100%;
-	margin: auto;
-	position: relative;
-	overflow: hidden;
+#right-move > img {
+	margin-left: 0%;
 }
 
-.gallery-images {
-	width: 100%;
-	height: 100%;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	position: absolute;
-	top: 0px;
-	left: 0px;
+#left-move > img, 
+#right-move > img {
+	width: 90%;
+	margin-top: 25%;
+	transition: margin-left 0.1s linear;
+}
+
+#left-move > img:hover {
+	margin-left: 0%;
+}
+
+#right-move > img:hover {
+	margin-left: 10%;
 }
 
 .before-after-switch {
@@ -184,6 +184,30 @@
 	font-weight: bolder;
 }
 
+/*-----------This is a dummy testing----------------*/
+#image-area {
+	width: 92%;
+	height: 85%;
+	margin: auto;
+	overflow-y: hidden;
+	overflow-x: scroll;
+}
+
+#inside-area {
+	height: 100%;
+	width: 200%;
+	display: flex;
+	justify-content: space-between;
+	flex-flow: row wrap;
+}
+
+.gallery-image {
+	height: 100%;
+	width: 50%;
+	background-size: cover;
+	background-position: center center;
+	position: relative;
+}
 
 @media screen and (min-width: 1505px) {
 	#service-content,
