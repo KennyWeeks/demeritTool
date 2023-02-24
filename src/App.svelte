@@ -1,6 +1,8 @@
 <script>
   import Button from "./components/Button.svelte";
   import {onMount} from "svelte";
+  import DemoView from "./views/DemoView.svelte";
+  import BodyPart from "./views/BodyParts.svelte";
 </script>
 
 <svelte:window on:click="{()=>{
@@ -13,10 +15,18 @@
     <div id="editor">
       <h3>Write demerit content here</h3>
       <hr>
+
+      <BodyPart/>
     </div>
 
     <div id="preview">
       
+      <div id="inner-body">
+
+        <DemoView/>
+
+      </div>
+
     </div>
 
   </div>
@@ -63,6 +73,18 @@
   position:absolute;
   right:0px;
   top:0px;
+  overflow:scroll;
+  scrollbar-width:none;
+}
+
+#preview::--webkit-scrollbar {
+  display:none;
+}
+
+#inner-body {
+  display:inline-block;
+  box-shadow:0 0 0 1px #000;
+  padding:300px;
 }
 
 </style>
