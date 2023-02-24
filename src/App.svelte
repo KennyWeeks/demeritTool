@@ -17,6 +17,10 @@
       <hr>
 
       <BodyPart/>
+
+      <button on:click="{()=>{
+        print(); //I just want to see what this does on a phone.
+      }}">print test</button>
     </div>
 
     <div id="preview">
