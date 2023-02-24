@@ -1,8 +1,10 @@
-<script></script>
+<script>
+
+</script>
 
 <label for="textarea">Type demerit details here</label>
 <textarea name="textarea" rows="20" placeholder="Write demerit details here ..." on:focus="{(e)=>{
-    e.target.style.outlineStyle = "none";
+    e.target.style.outline = "none";
 }}"></textarea>
 
 <style>
