@@ -12,6 +12,7 @@
     label {
         margin-bottom:10px;
         color:#000;
+        font-size:20px;
     }
 
     textarea[name="textarea"] {
@@ -20,6 +21,9 @@
         width:470px;
         background-color:#fff;
         color:#000;
+        border:2px solid #000;
+        margin-top:5px;
+        font-size:18px;
     }
 
     textarea[name="textarea"]:focus {

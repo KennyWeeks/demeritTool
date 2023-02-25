@@ -18,7 +18,8 @@
 
     label {
         display:inline-block;
-        margin-bottom:10px;
+        margin-bottom:0px;
+        font-size:20px;
         color:#000;
     }
 
@@ -26,6 +27,12 @@
         outline:none;
         background-color:#fff;
         color:#000;
+        margin-top:5px;
+        margin-bottom:10px;
+        font-size:18px;
+        box-shadow:none;
+        border:2px solid #000;
+        line-height:1.5;
     }
 
 </style>

@@ -5,22 +5,18 @@
   import BodyPart from "./views/BodyParts.svelte";
 </script>
 
-<svelte:window on:click="{()=>{
-  alert("Sup");
-}}"/>
+<svelte:window on:click="{()=>{}}"/>
 
 <main>
   <div id="main-area">
 
     <div id="editor">
-      <h3>Write demerit content here</h3>
-      <hr>
+      <div id="total-editor-block">
+        <h3>Write demerit content here</h3>
+        <hr>
 
-      <BodyPart/>
-
-      <button on:click="{()=>{
-        print(); //I just want to see what this does on a phone.
-      }}">print test</button>
+        <BodyPart/>
+      </div>
     </div>
 
     <div id="preview">
@@ -60,12 +56,21 @@
   display:none;
 }
 
-#editor > h3 {
-  color:#000;
-  margin-left:10px;
+#total-editor-block {
+  box-shadow:inset 0 0 0 1px #000;
+  overflow:hidden;
+  padding-top:10px;
+  padding-bottom:30px;
 }
 
-#editor > hr {
+#total-editor-block > h3 {
+  color:#000;
+  margin-left:10px;
+  margin-top:5px;
+  margin-bottom:5px;
+}
+
+#total-editor-block > hr {
   width:480px;
   margin-left:10px;
 }
