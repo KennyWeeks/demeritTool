@@ -102,4 +102,24 @@
   padding:300px;
 }
 
+@media only screen and (max-width:500px) {
+  #editor {
+    width:100vw;
+    z-index:10000000; /*Make this the dominant element*/
+  }
+
+  #total-editor-block {
+    width:100vw;
+  }
+
+  #total-editor-block > h3 {
+    margin-left:2vw;
+  }
+
+  #total-editor-block > hr {
+    width:95vw;
+    margin-left:2vw;
+  }
+}
+
 </style>

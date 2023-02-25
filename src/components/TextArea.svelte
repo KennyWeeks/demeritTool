@@ -18,12 +18,14 @@
     textarea[name="textarea"] {
         border-radius:5px;
         resize:none;
-        width:470px;
+        width:465px;
         background-color:#fff;
         color:#000;
         border:2px solid #000;
         margin-top:5px;
         font-size:18px;
+        border-radius:0px;
+        padding:5px;
     }
 
     textarea[name="textarea"]:focus {
@@ -32,7 +34,7 @@
 
     @media only screen and (max-width:500px) {
         textarea[name="textarea"] {
-            width:calc(100vw - 20px);
+            width:calc(94vw - 5px);
         }
     }
 

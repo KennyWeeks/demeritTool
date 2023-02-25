@@ -32,6 +32,7 @@
         box-shadow:none;
         border:2px solid #000;
         line-height:1.5;
+        padding-left:5px
     }
 
 </style>
