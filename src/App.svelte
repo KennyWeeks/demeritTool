@@ -22,9 +22,11 @@
       let fs = document.getElementById("flip-switch");
       if(toggle == 0) {
         fs.style.left = "-50px";
+        document.getElementById("editor").style.left = "-100vw";
         toggle = 1;
       } else {
         fs.style.left = "calc(100vw - 50px)";
+        document.getElementById("editor").style.left = "0vw";
         toggle = 0;
       }
     }}" on:keydown="{()=>{}}">
@@ -123,8 +125,8 @@
 
 #inner-body {
   display:inline-block;
-  box-shadow:0 0 0 1px #000;
   padding:300px;
+  overflow:hidden;
 }
 
 @media only screen and (max-width:500px) {
@@ -177,6 +179,20 @@
   #total-editor-block > hr {
     width:95vw;
     margin-left:2vw;
+  }
+
+  #preview {
+    width:100vw;
+  }
+
+  #inner-body {
+    height:calc(0.5 * 11 * 96px);
+    width:calc(0.5 * 8.5 * 96px);
+    position:absolute;
+    top:50%;
+    left:50%;
+    padding:30px;
+    transform:translate(-50%, -50%);
   }
 }
 

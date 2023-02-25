@@ -118,6 +118,9 @@ just copy the style strings over-->
     @media only screen and (max-width:500px) {
         #main-component {
             transform:scale(0.5);
+            position:absolute;
+            left:-50%;
+            top:-50%;
         }
     }
 
