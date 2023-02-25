@@ -3,6 +3,8 @@
   import {onMount} from "svelte";
   import DemoView from "./views/DemoView.svelte";
   import BodyPart from "./views/BodyParts.svelte";
+
+  let toggle = 0;
 </script>
 
 <svelte:window on:load="{()=>{
@@ -16,7 +18,30 @@
 
 <main>
   <div id="main-area">
+    <div id="flip-switch" on:click="{()=>{
+      let fs = document.getElementById("flip-switch");
+      if(toggle == 0) {
+        fs.style.left = "-50px";
+        toggle = 1;
+      } else {
+        fs.style.left = "calc(100vw - 50px)";
+        toggle = 0;
+      }
+    }}" on:keydown="{()=>{}}">
 
+      <div class="images">
+
+        <img src="eye.png" width="35" alt="View"/>
+
+      </div>
+
+      <div class="images">
+
+        <img src="generate.png" width="25" alt="View"/>
+
+      </div>
+
+    </div>
     <div id="editor">
       <div id="total-editor-block">
         <h3>Write demerit content here</h3>
@@ -103,6 +128,38 @@
 }
 
 @media only screen and (max-width:500px) {
+
+  #flip-switch {
+    width:100px;
+    height:50px;
+    border-radius:5px;
+    position:absolute;
+    background-color:#fff;
+    position:absolute;
+    top:20px;
+    left:calc(100vw - 50px);
+    box-shadow:0 0 2px #000;
+    z-index:1000000000;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:nowrap;
+    flex-flow:row;
+  }
+
+  .images {
+    width:50px;
+    height:50px;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .images > img {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+  }
+
   #editor {
     width:100vw;
     z-index:10000000; /*Make this the dominant element*/
@@ -110,6 +167,7 @@
 
   #total-editor-block {
     width:100vw;
+    padding-bottom:80px;
   }
 
   #total-editor-block > h3 {
