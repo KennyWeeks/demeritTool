@@ -4,6 +4,7 @@
     import Input from "../components/Input.svelte";
     import Button from "../components/Button.svelte";
     import {onMount} from "svelte";
+    import { construct_svelte_component } from "svelte/internal";
 
     let inputList = {"name": ["text", "Your name ..."], "date": ["date", "02/14/2023"], "hr-number": ["text", "1111111..."], "demerit-points": ["number", "1"], "who-assigned-the-demerit": ["text", "Captain ...."]}
     
@@ -49,7 +50,54 @@
 
     <TextArea/>
 
-    <Button printbutton="{true}" buttonText="Print"/>
+    <Button printbutton="{true}" buttonText="Print" on:click="{()=>{
+
+        //Basically 
+        let inputs = document.querySelectorAll("input");
+        let notComplete = false;
+        inputs = Array.from(inputs);
+        inputs.forEach((e)=>{
+            if(e.value == "") {
+                e.style.outline = "2px solid #00ff00";
+                notComplete = true;
+            }
+        });
+
+        let textArea = document.querySelectorAll("textarea")[0];
+        console.log(textArea.value)
+        if(textArea.value == "") {
+            textArea.style.outline = "2px solid #00ff00";
+            notComplete = true;
+        }
+
+        if(!notComplete) {
+            document.getElementById("name-text").innerText = inputs[0].value; //This is the name
+            document.getElementById("date-text").innerText = inputs[1].value; //This is the date
+            document.getElementById("number-text").innerText = inputs[2].value; //This is the hr-number
+            document.getElementById("demerit-points").innerText = inputs[3].value;
+            document.getElementById("assigned").innerText = inputs[4].value;
+
+            //we'll render the time display
+            let time = ""
+            let select = document.querySelectorAll("select");
+            select = Array.from(select);
+            console.log(select);
+            select.forEach((e)=>{
+                if(e.getAttribute("name") == "hours") {
+                    time += e.value + ":"
+                } else if(e.getAttribute("name") == "ampm") {
+                    time += " " + e.value;
+                } else {
+                    time += e.value;
+                }
+            });
+
+            document.getElementById("time").innerText = time;
+
+            document.getElementById("demerit-description").innerText = textArea.value.charAt(0).toLowerCase() + textArea.value.slice(1);
+        }
+
+    }}"/>
 
 </div>
 
