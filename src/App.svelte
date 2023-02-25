@@ -39,7 +39,7 @@
 
       <div class="images">
 
-        <img src="generate.png" width="25" alt="View"/>
+        <img src="generate.png" width="35" alt="View"/>
 
       </div>
 
