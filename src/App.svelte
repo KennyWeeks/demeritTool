@@ -5,7 +5,14 @@
   import BodyPart from "./views/BodyParts.svelte";
 </script>
 
-<svelte:window on:click="{()=>{}}"/>
+<svelte:window on:load="{()=>{
+  let teb = document.getElementById("total-editor-block");
+  if(window.innerHeight > teb.offsetHeight) {
+    teb.style.position = "absolute";
+    teb.style.top = "50%";
+    teb.style.transform = "translateY(-50%)";
+  }
+}}" on:click="{()=>{}}"/>
 
 <main>
   <div id="main-area">
@@ -57,7 +64,6 @@
 }
 
 #total-editor-block {
-  box-shadow:inset 0 0 0 1px #000;
   overflow:hidden;
   padding-top:10px;
   padding-bottom:30px;

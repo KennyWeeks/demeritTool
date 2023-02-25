@@ -14,6 +14,9 @@
        <Input labelTag="{name.charAt(0).toUpperCase() + name.slice(1)}" type="{inputList[name][0]}" def="{inputList[name][1]}"/><br>
        {#if name == "hr-number"}
         <hr>
+        {:else if name=="demerit-points"}
+
+        <!--We need to add the time selector-->
        {/if}
     {/each}
 
