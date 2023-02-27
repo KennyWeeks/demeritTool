@@ -4,6 +4,8 @@
     import Input from "../components/Input.svelte";
     import Button from "../components/Button.svelte";
     import {onMount} from "svelte";
+    export let printButton = true;
+    export let buttonText = "Print";
 
     let inputList = {"name": ["text", "Your name ..."], "date": ["date", "02/14/2023"], "hr-number": ["text", "1111111..."], "demerit-points": ["number", "1"], "who-assigned-the-demerit": ["text", "Captain ...."]}
     
@@ -49,7 +51,7 @@
 
     <TextArea/>
 
-    <Button printbutton="{true}" buttonText="Print" on:click="{()=>{
+    <Button printbutton="{printButton}" buttonText="{buttonText}" on:click="{()=>{
 
         //Basically 
         let inputs = document.querySelectorAll("input");

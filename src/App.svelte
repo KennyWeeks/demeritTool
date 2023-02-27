@@ -5,6 +5,8 @@
   import BodyPart from "./views/BodyParts.svelte";
 
   let toggle = 0;
+  let buttonText = "print"
+  let printButton = true;
   
 </script>
 
@@ -15,6 +17,9 @@
   if(window.innerWidth > 500) {
 
     previewCd[0].style.display = "none";
+  } else {
+    buttonText = "Preview";
+    printButton = false;
   }
   if(window.innerHeight > teb.offsetHeight) {
     teb.style.position = "absolute";
@@ -22,9 +27,17 @@
     teb.style.transform = "translateY(-50%)";
   }
 }}" on:click="{()=>{}}" on:resize="{()=>{
-  console.log(preview.childNodes);
+  let preview = document.getElementById("preview");
+  let previewCd = Array.from(preview.childNodes);
   if(window.innerWidth <= 500) {
+    previewCd[0].style.display = "block";
     console.log("Sup");
+    buttonText = "Preview";
+    printButton = false;
+  } else {
+    previewCd[0].style.display = "none";
+    buttonText = "Print";
+    printButton = true;
   }
 }}"/>
 
@@ -61,13 +74,13 @@
         <h3>Write demerit content here</h3>
         <hr>
 
-        <BodyPart/>
+        <BodyPart printButton="{printButton}" buttonText="{buttonText}"/>
       </div>
     </div>
 
     <div id="preview">
 
-      <Button view={true}/>
+      <Button view={true} printbutton={true} buttonText="Print"/>
       
       <div id="inner-body">
 
