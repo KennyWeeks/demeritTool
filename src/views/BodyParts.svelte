@@ -4,7 +4,6 @@
     import Input from "../components/Input.svelte";
     import Button from "../components/Button.svelte";
     import {onMount} from "svelte";
-    import { construct_svelte_component } from "svelte/internal";
 
     let inputList = {"name": ["text", "Your name ..."], "date": ["date", "02/14/2023"], "hr-number": ["text", "1111111..."], "demerit-points": ["number", "1"], "who-assigned-the-demerit": ["text", "Captain ...."]}
     
@@ -95,6 +94,12 @@
             document.getElementById("time").innerText = time;
 
             document.getElementById("demerit-description").innerText = textArea.value.charAt(0).toLowerCase() + textArea.value.slice(1);
+
+            if(window.innerWidth <= 500) {
+                document.getElementById("flip-switch").style.left = "-50px";
+                document.getElementById("flip-switch").setAttribute("data-toggle", "1");
+                document.getElementById("editor").style.left = "-100vw";
+            }
         }
 
     }}"/>

@@ -5,29 +5,41 @@
   import BodyPart from "./views/BodyParts.svelte";
 
   let toggle = 0;
+  
 </script>
 
 <svelte:window on:load="{()=>{
   let teb = document.getElementById("total-editor-block");
+  let preview = document.getElementById("preview");
+  let previewCd = Array.from(preview.childNodes);
+  if(window.innerWidth > 500) {
+
+    previewCd[0].style.display = "none";
+  }
   if(window.innerHeight > teb.offsetHeight) {
     teb.style.position = "absolute";
     teb.style.top = "50%";
     teb.style.transform = "translateY(-50%)";
   }
-}}" on:click="{()=>{}}"/>
+}}" on:click="{()=>{}}" on:resize="{()=>{
+  console.log(preview.childNodes);
+  if(window.innerWidth <= 500) {
+    console.log("Sup");
+  }
+}}"/>
 
 <main>
   <div id="main-area">
-    <div id="flip-switch" on:click="{()=>{
+    <div id="flip-switch" data-toggle="0" on:click="{()=>{
       let fs = document.getElementById("flip-switch");
-      if(toggle == 0) {
+      if(parseInt(fs.getAttribute("data-toggle")) == 0) {
         fs.style.left = "-50px";
         document.getElementById("editor").style.left = "-100vw";
-        toggle = 1;
+        fs.setAttribute("data-toggle", "1")
       } else {
         fs.style.left = "calc(100vw - 50px)";
         document.getElementById("editor").style.left = "0vw";
-        toggle = 0;
+        fs.setAttribute("data-toggle", "0")
       }
     }}" on:keydown="{()=>{}}">
 
@@ -54,6 +66,8 @@
     </div>
 
     <div id="preview">
+
+      <Button view={true}/>
       
       <div id="inner-body">
 
@@ -137,7 +151,7 @@
     border-radius:5px;
     position:absolute;
     background-color:#fff;
-    position:absolute;
+    position:fixed;
     top:20px;
     left:calc(100vw - 50px);
     box-shadow:0 0 2px #000;

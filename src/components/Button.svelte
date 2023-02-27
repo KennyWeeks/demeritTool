@@ -2,10 +2,11 @@
 
     export let buttonText = "click"
     export let printbutton = false;
+    export let view = false;
 
 </script>
 
-<button class="clickbutton" class:printbutton={printbutton === true} on:click>{buttonText}</button>
+<button class="clickbutton" class:printbutton={printbutton === true} class:view={view === true} on:click>{buttonText}</button>
 
 <style>
 
@@ -21,6 +22,12 @@
     .printbutton {
         background-color:#000;
         color:#fff;
+    }
+
+    .view {
+        position:fixed;
+        right:10px;
+        top:20px;
     }
 
 </style>
