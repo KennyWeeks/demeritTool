@@ -3,14 +3,17 @@
   import {onMount} from "svelte";
   import DemoView from "./views/DemoView.svelte";
   import BodyPart from "./views/BodyParts.svelte";
+    import { claim_component } from "svelte/internal";
 
   let toggle = 0;
   let buttonText = "print"
   let printButton = true;
+
+  const halfWidth = 0.5 * 8.5 * 96
   
 </script>
 
-<svelte:window on:load="{()=>{
+<!--<svelte:window on:load="{()=>{
   let teb = document.getElementById("total-editor-block");
   let preview = document.getElementById("preview");
   let previewCd = Array.from(preview.childNodes);
@@ -26,7 +29,7 @@
     teb.style.top = "50%";
     teb.style.transform = "translateY(-50%)";
   }
-}}" on:click="{()=>{}}" on:resize="{()=>{
+}}" on:resize="{()=>{
   let preview = document.getElementById("preview");
   let previewCd = Array.from(preview.childNodes);
   if(window.innerWidth <= 500) {
@@ -38,7 +41,20 @@
     buttonText = "Print";
     printButton = true;
   }
-}}"/>
+
+  //I need to set something here
+  if(window.innerWidth - 500 < 8.5 * 96 && window.innerWidth - 500 > halfWidth) {
+    let size = window.innerWidth - 500;
+    let percent = (1 * size / (8.5 * 96));
+    let mc = document.getElementById("main-component")
+    mc.style.transform = `scale(${percent})`;
+    console.log("Test"); 
+  } else if(window.innerWidth - 500 >= 8.5 * 96) {
+    let mc = document.getElementById("main-component")
+    mc.style.width = "calc(8.5*96px)";
+    mc.style.height = "calc(11*96px)";
+  }
+}}"/>-->
 
 <main>
   <div id="main-area">
@@ -151,8 +167,19 @@
 
 #inner-body {
   display:inline-block;
-  padding:300px;
   overflow:hidden;
+  padding:100px;
+}
+
+@media only screen and (max-width:794px) and (min-width:500px) {
+  #editor {
+      z-index:1000000;
+  }
+
+  #preview {
+    filter:blur(8px);
+    width:100vw;
+  }
 }
 
 @media only screen and (max-width:500px) {
