@@ -31,7 +31,6 @@
   let previewCd = Array.from(preview.childNodes);
   if(window.innerWidth <= 500) {
     previewCd[0].style.display = "block";
-    console.log("Sup");
     buttonText = "Preview";
     printButton = false;
   } else {

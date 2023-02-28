@@ -33,12 +33,12 @@
 
         <label for="hours" style="font-size:20px; margin-bottom:10px; color:#000;">Time of Demerit</label><br>
         <select name="hours" id="hours-tag" style="margin-top:5px; margin-bottom:10px; font-size:18px;">
-            {#each Array.from(Array(24).keys(),n=>n+1) as n}
+            {#each Array.from(Array(25).keys(),n=>n) as n}
                 <option value="{n}">{n}</option>
             {/each}
         </select>
         <select name="minutes" id="minutes" style="font-size:18px;">
-            {#each Array.from(Array(60).keys(),n=>n+1) as n}
+            {#each Array.from(Array(60).keys(),n=>n) as n}
                 <option value="{n}">{n}</option>
             {/each}
         </select>
@@ -85,11 +85,21 @@
             console.log(select);
             select.forEach((e)=>{
                 if(e.getAttribute("name") == "hours") {
-                    time += e.value + ":"
+                    let hoursTemp = e.value
+                    if(parseInt(e.value) == 0) {
+                        hoursTemp = 12;
+                    }
+                    time += hoursTemp + ":"
+
                 } else if(e.getAttribute("name") == "ampm") {
                     time += " " + e.value;
                 } else {
-                    time += e.value;
+                    let minTemp = e.value
+                    if(parseInt(e.value) == 0) {
+                        minTemp = "00";
+                    }
+                    console.log(minTemp)
+                    time += minTemp;
                 }
             });
 
