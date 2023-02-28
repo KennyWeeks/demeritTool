@@ -112,6 +112,14 @@
                 document.getElementById("flip-switch").setAttribute("data-toggle", "1");
                 document.getElementById("editor").style.left = "-100vw";
             }
+        } else {
+            let editor = document.getElementById("editor");
+            let teb = document.getElementById("total-editor-block");
+            if(window.innerHeight < teb.offsetHeight) {
+                console.log("Hello")
+                editor.scrollTo(0, 0);
+            }
+            
         }
 
     }}"/>
