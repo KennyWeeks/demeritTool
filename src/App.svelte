@@ -133,7 +133,11 @@
 
     <div id="preview">
 
-      <Button view={true} printbutton={true} buttonText="Print"/>
+      <Button view={true} printbutton={true} buttonText="Print" on:click="{()=>{
+        let newWindow = window.open("", "PRINT", `height=${8.5*96}px, width=${11*96}px`);
+  
+        newWindow.print()
+      }}"/>
       
       <div id="inner-body">
 
