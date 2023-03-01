@@ -9,26 +9,45 @@
   let buttonText = "print"
   let printButton = true;
 
-  const halfWidth = 0.5 * 8.5 * 96
+  const halfWidth = 0.5 * 8.5 * 96;
   
 </script>
 
-<!--<svelte:window on:load="{()=>{
+<svelte:window on:load="{()=>{
   let teb = document.getElementById("total-editor-block");
   let preview = document.getElementById("preview");
   let previewCd = Array.from(preview.childNodes);
-  if(window.innerWidth > 500) {
-
-    previewCd[0].style.display = "none";
+  if(window.innerWidth > 794) {
+    //This is the print button for cellphone sized screens, so essentially,
+    //it will remove this from the display so there aren't 2 print buttons.
+    previewCd[0].style.display = "none"; 
   } else {
+    //Essentially, this will just change the button layout
+    //on smaller screens so the original print button 
+    //will turn into a 'Preview' button, and it will display
+    //a print button in the preview page.
     buttonText = "Preview";
     printButton = false;
   }
+
+  //This is just styling stuff because the total editor space is 
+  //pretty tiny, so this but on certain screens it will be smaller then
+  //the screen, so it should be centered on those screen
   if(window.innerHeight > teb.offsetHeight) {
     teb.style.position = "absolute";
     teb.style.top = "50%";
     teb.style.transform = "translateY(-50%)";
   }
+
+  //This is a loader that makes the printed page fit the screen.
+  if(window.innerWidth - 500 <= 8.5 * 96 && window.innerWidth - 500 >= halfWidth) {
+    //This will make the page an appropriate size to fill the space.
+    let size = window.innerWidth - 500;
+    let percent = (1 * size / (8.5 * 96));
+    let mc = document.getElementById("main-component")
+    mc.style.transform = `scale(${percent})`;
+  }
+   
 }}" on:resize="{()=>{
   let preview = document.getElementById("preview");
   let previewCd = Array.from(preview.childNodes);
@@ -82,7 +101,7 @@
     let editor = document.getElementById("editor");
     editor.style.left = "0px";
   }
-}}"/>-->
+}}"/>
 
 <main>
   <div id="main-area">
