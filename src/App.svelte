@@ -154,7 +154,32 @@
 
       <Button view={true} printbutton={true} buttonText="Print" on:click="{()=>{
         let newWindow = window.open("", "PRINT", `height=${8.5*96}px, width=${11*96}px`);
-  
+        let mainContent = document.getElementById("main-component");
+        let CurrentArray = Array.from(mainContent.childNodes);
+        // @ts-ignore
+        CurrentArray = CurrentArray.filter((val)=>{return val.data != " "})
+        
+        //So we want to add the main component here
+        newWindow.document.write("<div id='main-component'></div>");
+        let newMainComponent = newWindow.document.getElementById("main-component");
+
+        newMainComponent.innerHTML = mainContent.innerHTML; 
+
+        let newMainArray = Array.from(newMainComponent.childNodes);
+
+        //Parse the array
+        newMainArray = newMainArray.filter((val)=>{return val.data != " "})
+
+        //Save the current styles to the new page
+        newMainComponent.setAttribute("style", mainContent.getAttribute("style"));
+
+        //Save the inner components styles from this page to the new page
+        for(let i = 0; i < newMainArray.length; i++) {
+            newMainArray[i].setAttribute("style", CurrentArray[i].getAttribute("style"));
+        }
+
+        newWindow.focus();
+
         newWindow.print()
       }}"/>
       
