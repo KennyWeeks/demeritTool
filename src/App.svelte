@@ -3,7 +3,7 @@
   import {onMount} from "svelte";
   import DemoView from "./views/DemoView.svelte";
   import BodyPart from "./views/BodyParts.svelte";
-    import { claim_component } from "svelte/internal";
+    import { claim_component, exclude_internal_props, missing_component, mount_component } from "svelte/internal";
 
   let toggle = 0;
   let buttonText = "print"
@@ -13,7 +13,7 @@
   
 </script>
 
-<!--<svelte:window on:load="{()=>{
+<svelte:window on:load="{()=>{
   let teb = document.getElementById("total-editor-block");
   let preview = document.getElementById("preview");
   let previewCd = Array.from(preview.childNodes);
@@ -32,7 +32,7 @@
 }}" on:resize="{()=>{
   let preview = document.getElementById("preview");
   let previewCd = Array.from(preview.childNodes);
-  if(window.innerWidth <= 500) {
+  if(window.innerWidth <= 794) {
     previewCd[0].style.display = "block";
     buttonText = "Preview";
     printButton = false;
@@ -49,24 +49,62 @@
     let mc = document.getElementById("main-component")
     mc.style.transform = `scale(${percent})`;
     console.log("Test"); 
-  } else if(window.innerWidth - 500 >= 8.5 * 96) {
+  } else if((window.innerWidth - 500 >= 8.5 * 96)) {
     let mc = document.getElementById("main-component")
     mc.style.width = "calc(8.5*96px)";
     mc.style.height = "calc(11*96px)";
+  } else if(window.innerWidth  <= 794 && window.innerWidth >= 551) {
+    let mc = document.getElementById("main-component")
+    mc.style.transform = `scale(1.0)`;
+  } else if(window.innerWidth < 551) {
+    let mc = document.getElementById("main-component")
+    mc.style.transform = `scale(0.5)`;
   }
-}}"/>-->
+
+  if(window.innerWidth <= 550) {
+    let fs = document.getElementById("flip-switch");
+    if(parseInt(fs.getAttribute("data-toggle")) == 1) {
+      fs.style.left = "-50px";
+    } else {
+      fs.style.left = "calc(100vw - 50px)";
+    }
+  } else if(window.innerWidth > 550 && window.innerWidth <= 794) {
+    let fs = document.getElementById("flip-switch");
+    if(parseInt(fs.getAttribute("data-toggle")) == 1) {
+      fs.style.left = "0px";
+    } else {
+      fs.style.left = "500px";
+    }
+  } else {
+    let fs = document.getElementById("flip-switch");
+    fs.style.left = "500px";
+    fs.setAttribute("data-toggle", "0");
+    let editor = document.getElementById("editor");
+    editor.style.left = "0px";
+  }
+}}"/>
 
 <main>
   <div id="main-area">
     <div id="flip-switch" data-toggle="0" on:click="{()=>{
       let fs = document.getElementById("flip-switch");
-      if(parseInt(fs.getAttribute("data-toggle")) == 0) {
-        fs.style.left = "-50px";
+      if(parseInt(fs.getAttribute("data-toggle")) == 0) { 
         document.getElementById("editor").style.left = "-100vw";
+        if(window.innerWidth > 500) {
+          fs.style.left = "0px";
+          document.getElementById("editor").style.boxShadow = "none";
+        } else {
+          fs.style.left = "-50px";
+        }
         fs.setAttribute("data-toggle", "1")
       } else {
-        fs.style.left = "calc(100vw - 50px)";
         document.getElementById("editor").style.left = "0vw";
+        if(window.innerWidth > 500) {
+          document.getElementById("editor").style.boxShadow = "0 0 0 50vw rgba(0,0,0,0.8)";
+          fs.style.left = "500px";
+        } else {
+          fs.style.left = "calc(100vw - 50px)";
+        }
         fs.setAttribute("data-toggle", "0")
       }
     }}" on:keydown="{()=>{}}">
@@ -171,20 +209,56 @@
   padding:100px;
 }
 
-@media only screen and (max-width:794px) and (min-width:500px) {
+#flip-switch {
+  display:none;
+}
+
+@media only screen and (max-width:794px) and (min-width:551px) {
   #editor {
       z-index:1000000;
+      box-shadow:0 0 0 50vw rgba(0,0,0,0.8);
+  }
+
+  #flip-switch {
+    display:block;
+    position:absolute;
+    width:50px;
+    height:50px;
+    top:20px;
+    left:500px;
+    background-color:#fff;
+    z-index:1000000000;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+  }
+
+  .images {
+    width:50px;
+    height:50px;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .images:nth-child(2) {
+    display:none
+;  }
+
+  .images > img {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
   }
 
   #preview {
-    filter:blur(8px);
     width:100vw;
   }
 }
 
-@media only screen and (max-width:500px) {
+@media only screen and (max-width:550px) {
 
   #flip-switch {
+    display:block;
     width:100px;
     height:50px;
     border-radius:5px;
