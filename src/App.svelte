@@ -154,14 +154,16 @@
 
       <Button view={true} printbutton={true} buttonText="Print" on:click="{()=>{
         let newWindow = window.open("", "PRINT", `height=${8.5*96}px, width=${11*96}px`);
+        newWindow.print()
         let mainContent = document.getElementById("main-component");
         let CurrentArray = Array.from(mainContent.childNodes);
-        // @ts-ignore
+        
         CurrentArray = CurrentArray.filter((val)=>{return val.data != " "})
         
         //So we want to add the main component here
         newWindow.document.write("<div id='main-component'></div>");
         let newMainComponent = newWindow.document.getElementById("main-component");
+        newMainComponent.style.transform = "scale(1.0)";
 
         newMainComponent.innerHTML = mainContent.innerHTML; 
 
@@ -178,9 +180,7 @@
             newMainArray[i].setAttribute("style", CurrentArray[i].getAttribute("style"));
         }
 
-        newWindow.focus();
-
-        newWindow.print()
+        
       }}"/>
       
       <div id="inner-body">
