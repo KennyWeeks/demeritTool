@@ -7,8 +7,9 @@
     export let printButton = true;
     export let buttonText = "Print";
 
-    let inputList = {"name": ["text", "Your name ..."], "date": ["date", "02/14/2023"], "hr-number": ["text", "1111111..."], "demerit-points": ["number", "1"], "who-assigned-the-demerit": ["text", "Captain ...."]}
-    
+
+    let inputList = {"name": ["text", "Your name ...", false], "date": ["date", "02/14/2023", false], "hr-number": ["text", "1111111...", false], "demerit-points": ["number", "1", false], "who-assigned-the-demerit": ["text", "Captain ....", false]}
+
     onMount(async ()=>{
         //This will essentially set the time
         let date = new Date();
@@ -26,7 +27,10 @@
 <div id="editor-block">
 
     {#each Object.keys(inputList) as name}
-       <Input labelTag="{name.charAt(0).toUpperCase() + name.slice(1)}" type="{inputList[name][0]}" def="{inputList[name][1]}"/><br>
+       <Input err="{inputList[name][2]}" labelTag="{name.charAt(0).toUpperCase() + name.slice(1)}" type="{inputList[name][0]}" def="{inputList[name][1]}" on:focus="{(e, x=name)=>{
+        e.target.style.outline = "none";
+        inputList[x][2] = false;
+       }}"/><br>
        {#if name == "hr-number"}
         <hr>
         {:else if name=="demerit-points"}
@@ -58,8 +62,10 @@
         let notComplete = false;
         inputs = Array.from(inputs);
         inputs.forEach((e)=>{
+            let keys = e.getAttribute("name").toLowerCase()
             if(e.value == "") {
-                e.style.outline = "2px solid #00ff00";
+                inputList[keys][2] = true;
+                e.style.outline = "2px solid #ff0000";
                 notComplete = true;
             }
         });
@@ -67,7 +73,7 @@
         let textArea = document.querySelectorAll("textarea")[0];
         console.log(textArea.value)
         if(textArea.value == "") {
-            textArea.style.outline = "2px solid #00ff00";
+            textArea.style.outline = "2px solid #ff0000";
             notComplete = true;
         }
 

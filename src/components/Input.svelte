@@ -4,13 +4,12 @@
     export let type="text";
     export let def = "";
     export let min = null;
+    export let err = false;
 
 </script>
 
-<label for="{labelTag}">{labelTag.replace(/-/g, " ")}</label><br>
-<input type="{type}" name="{labelTag}" class="inputtag" placeholder="{def}" min={min}  required on:focus="{(e)=>{
-    e.target.style.outline = "None";
-}}"/>
+<label for="{labelTag}">{labelTag.replace(/-/g, " ")} <span class:show={err === true}>Please enter data</span></label><br>
+<input type="{type}" name="{labelTag}" class="inputtag" placeholder="{def}" min={min}  required on:focus/>
 
 
 <style>
@@ -20,6 +19,17 @@
         margin-bottom:0px;
         font-size:20px;
         color:#000;
+    }
+
+    label > span {
+        font-weight:bolder;
+        font-size:15px;
+        color:#ff0000;
+        display:none;
+    }
+
+    .show {
+        display:block;
     }
 
     input {

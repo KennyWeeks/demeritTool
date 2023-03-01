@@ -13,7 +13,7 @@
   
 </script>
 
-<svelte:window on:load="{()=>{
+<!--<svelte:window on:load="{()=>{
   let teb = document.getElementById("total-editor-block");
   let preview = document.getElementById("preview");
   let previewCd = Array.from(preview.childNodes);
@@ -82,7 +82,7 @@
     let editor = document.getElementById("editor");
     editor.style.left = "0px";
   }
-}}"/>
+}}"/>-->
 
 <main>
   <div id="main-area">
