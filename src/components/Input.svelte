@@ -9,8 +9,25 @@
 </script>
 
 <label for="{labelTag}">{labelTag.replace(/-/g, " ")} <span class:show={err === true}>Please enter data</span></label><br>
-<input type="{type}" name="{labelTag}" class="inputtag" placeholder="{def}" min={min}  required on:focus/>
-
+{#if labelTag === "Hr-number"}
+<input type="{type}" name="{labelTag}" class="inputtag" placeholder="{def}" min={min} on:keypress|preventDefault={(e)=>{
+    if(e.charCode >= 48 && e.charCode <= 57) {
+        e.target.value += String.fromCharCode(e.charCode);
+    }
+}} required on:focus/>
+{:else if labelTag == "Name" || labelTag == "Who-assigned-the-demerit"}
+<input type="{type}" name="{labelTag}" class="inputtag" placeholder="{def}" min={min} on:keypress|preventDefault={(e)=>{
+    if(e.charCode < 48 || e.charCode > 57) {
+        let char = String.fromCharCode(e.charCode);
+        if(e.target.value.length == 0) {
+            char = char.toUpperCase();
+        }
+        e.target.value += char;
+    }
+}} required on:focus/>
+{:else}
+<input type="{type}" name="{labelTag}" class="inputtag" placeholder="{def}" min={min} required on:focus/>
+{/if}
 
 <style>
 

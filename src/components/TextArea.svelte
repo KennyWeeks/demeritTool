@@ -5,7 +5,15 @@
 <label for="textarea">Type demerit details here</label>
 <textarea name="textarea" rows="20" placeholder="Write demerit details here ..." on:focus="{(e)=>{
     e.target.style.outline = "none";
-}}"></textarea>
+}}" on:keypress|preventDefault={(e)=>{
+    if(e.charCode < 48 || e.charCode > 57) {
+        let char = String.fromCharCode(e.charCode);
+        if(e.target.value.length == 0) {
+            char = char.toUpperCase();
+        }
+        e.target.value += char;
+    }
+}} required></textarea>
 
 <style>
 
@@ -26,6 +34,7 @@
         font-size:18px;
         border-radius:0px;
         padding:5px;
+        font-family:Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     }
 
     textarea[name="textarea"]:focus {

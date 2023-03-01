@@ -10,6 +10,42 @@
   let printButton = true;
 
   const halfWidth = 0.5 * 8.5 * 96;
+
+  const printCommand = (mc) => {
+    let newWindow = window.open("", "PRINT", `height=${8.5*96}px, width=${11*96}px`);
+    if(window.innerWidth <= 794) {
+      newWindow.print()
+    }
+    //newWindow.print()
+    mc.style.transform = "scale(1.0)";
+    let CurrentArray = Array.from(mc.childNodes);
+    
+    CurrentArray = CurrentArray.filter((val)=>{return val.data != " "})
+    
+    //So we want to add the main component here
+    newWindow.document.write("<div id='main-component'></div>");
+    let newMainComponent = newWindow.document.getElementById("main-component");
+    
+    newMainComponent.innerHTML = mc.innerHTML; 
+
+    let newMainArray = Array.from(newMainComponent.childNodes);
+
+    //Parse the array
+    newMainArray = newMainArray.filter((val)=>{return val.data != " "})
+
+    //Save the current styles to the new page
+    newMainComponent.setAttribute("style", mc.getAttribute("style"));
+
+    //Save the inner components styles from this page to the new page
+    for(let i = 0; i < newMainArray.length; i++) {
+        newMainArray[i].setAttribute("style", CurrentArray[i].getAttribute("style"));
+    }
+
+    if(window.innerWidth > 794) {
+      newWindow.print()
+    }
+
+  }
   
 </script>
 
@@ -153,34 +189,8 @@
     <div id="preview">
 
       <Button view={true} printbutton={true} buttonText="Print" on:click="{()=>{
-        let newWindow = window.open("", "PRINT", `height=${8.5*96}px, width=${11*96}px`);
-        newWindow.print()
         let mainContent = document.getElementById("main-component");
-        let CurrentArray = Array.from(mainContent.childNodes);
-        
-        CurrentArray = CurrentArray.filter((val)=>{return val.data != " "})
-        
-        //So we want to add the main component here
-        newWindow.document.write("<div id='main-component'></div>");
-        let newMainComponent = newWindow.document.getElementById("main-component");
-        newMainComponent.style.transform = "scale(1.0)";
-
-        newMainComponent.innerHTML = mainContent.innerHTML; 
-
-        let newMainArray = Array.from(newMainComponent.childNodes);
-
-        //Parse the array
-        newMainArray = newMainArray.filter((val)=>{return val.data != " "})
-
-        //Save the current styles to the new page
-        newMainComponent.setAttribute("style", mainContent.getAttribute("style"));
-
-        //Save the inner components styles from this page to the new page
-        for(let i = 0; i < newMainArray.length; i++) {
-            newMainArray[i].setAttribute("style", CurrentArray[i].getAttribute("style"));
-        }
-
-        
+        printCommand(mainContent);
       }}"/>
       
       <div id="inner-body">
