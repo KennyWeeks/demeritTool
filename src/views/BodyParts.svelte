@@ -6,6 +6,7 @@
     import {onMount} from "svelte";
     export let printButton = true;
     export let buttonText = "Print";
+    export let mobileDisplay = false;
 
 
     let inputList = {"name": ["text", "Your name ...", false], "date": ["date", "02/14/2023", false], "hr-number": ["text", "1111111...", false], "demerit-points": ["number", "1", false], "who-assigned-the-demerit": ["text", "Captain ....", false]}
@@ -24,7 +25,7 @@
 
     const printCommand = (mc) => {
         let newWindow = window.open("", "PRINT", `height=${8.5*96}px, width=${11*96}px`);
-        if(window.innerWidth <= 794) {
+        if(mobileDisplay) {
         newWindow.print()
         }
         //newWindow.print()
@@ -52,7 +53,7 @@
             newMainArray[i].setAttribute("style", CurrentArray[i].getAttribute("style"));
         }
 
-        if(window.innerWidth > 794) {
+        if(!mobileDisplay) {
             newWindow.print()
         }
 

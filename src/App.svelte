@@ -137,98 +137,6 @@
   }
 }}"/>
 
-<!--<svelte:window on:load="{()=>{
-  let mobileCh = window.mobileCheck();
-  let teb = document.getElementById("total-editor-block");
-  let preview = document.getElementById("preview");
-  let previewCd = Array.from(preview.childNodes);
-  let mc = document.getElementById("main-component");
-  if(window.innerWidth > 794) {
-    //This is the print button for cellphone sized screens, so essentially,
-    //it will remove this from the display so there aren't 2 print buttons.
-    previewCd[0].style.display = "none"; 
-  } else {
-    //Essentially, this will just change the button layout
-    //on smaller screens so the original print button 
-    //will turn into a 'Preview' button, and it will display
-    //a print button in the preview page.
-    buttonText = "Preview";
-    printButton = false;
-  }
-
-  //This is just styling stuff because the total editor space is 
-  //pretty tiny, so this but on certain screens it will be smaller then
-  //the screen, so it should be centered on those screen
-  if(window.innerHeight > teb.offsetHeight) {
-    teb.style.position = "absolute";
-    teb.style.top = "50%";
-    teb.style.transform = "translateY(-50%)";
-  }
-
-  //This is a loader that makes the printed page fit the screen.
-  if(window.innerWidth - 500 <= 8.5 * 96 && window.innerWidth - 500 >= halfWidth) {
-    //This will make the page an appropriate size to fill the space.
-    let size = window.innerWidth - 500;
-    let percent = (1 * size / (8.5 * 96));
-    let mc = document.getElementById("main-component")
-    mc.style.transform = `scale(${percent})`;
-  }
-   
-}}" on:resize="{()=>{
-  let preview = document.getElementById("preview");
-  let previewCd = Array.from(preview.childNodes);
-  if(window.innerWidth <= 794) {
-    previewCd[0].style.display = "block";
-    buttonText = "Preview";
-    printButton = false;
-  } else {
-    previewCd[0].style.display = "none";
-    buttonText = "Print";
-    printButton = true;
-  }
-
-  //I need to set something here
-  if(window.innerWidth - 500 < 8.5 * 96 && window.innerWidth - 500 > halfWidth) {
-    let size = window.innerWidth - 500;
-    let percent = (1 * size / (8.5 * 96));
-    let mc = document.getElementById("main-component")
-    mc.style.transform = `scale(${percent})`;
-    console.log("Test"); 
-  } else if((window.innerWidth - 500 >= 8.5 * 96)) {
-    let mc = document.getElementById("main-component")
-    mc.style.width = "calc(8.5*96px)";
-    mc.style.height = "calc(11*96px)";
-  } else if(window.innerWidth  <= 794 && window.innerWidth >= 551) {
-    let mc = document.getElementById("main-component")
-    mc.style.transform = `scale(1.0)`;
-  } else if(window.innerWidth < 551) {
-    let mc = document.getElementById("main-component")
-    mc.style.transform = `scale(0.5)`;
-  }
-
-  if(window.innerWidth <= 550) {
-    let fs = document.getElementById("flip-switch");
-    if(parseInt(fs.getAttribute("data-toggle")) == 1) {
-      fs.style.left = "-50px";
-    } else {
-      fs.style.left = "calc(100vw - 50px)";
-    }
-  } else if(window.innerWidth > 550 && window.innerWidth <= 794) {
-    let fs = document.getElementById("flip-switch");
-    if(parseInt(fs.getAttribute("data-toggle")) == 1) {
-      fs.style.left = "0px";
-    } else {
-      fs.style.left = "500px";
-    }
-  } else {
-    let fs = document.getElementById("flip-switch");
-    fs.style.left = "500px";
-    fs.setAttribute("data-toggle", "0");
-    let editor = document.getElementById("editor");
-    editor.style.left = "0px";
-  }
-}}"/>-->
-
 <main>
   <div id="main-area">
     <div id="flip-switch" data-toggle="0" on:click="{(e)=>{
@@ -276,7 +184,7 @@
         <h3>Write demerit content here</h3>
         <hr>
 
-        <BodyPart printButton="{printButton}" buttonText="{buttonText}"/>
+        <BodyPart printButton="{printButton}" buttonText="{buttonText}" mobileDisplay="{mobileCheck()}"/>
 
       </div>
     </div>
