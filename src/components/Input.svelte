@@ -29,24 +29,24 @@
 <input type="{type}" name="{labelTag}" class="inputtag" placeholder="{def}" min={min} required on:focus/>
 {/if}
 
-<style>
+<style lang="scss">
 
     label {
         display:inline-block;
         margin-bottom:0px;
         font-size:20px;
         color:#000;
-    }
 
-    label > span {
-        font-weight:bolder;
-        font-size:15px;
-        color:#ff0000;
-        display:none;
-    }
+        span {
+            font-weight:bolder;
+            font-size:15px;
+            color:#ff0000;
+            display:none;
 
-    .show {
-        display:block;
+            .show {
+                display:block;
+            }
+        }
     }
 
     input {

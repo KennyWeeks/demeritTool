@@ -5,7 +5,6 @@
   import BodyPart from "./views/BodyParts.svelte";
 
   const halfWidth = 0.5 * 8.5 * 96;
-  let toggle = 0;
   let buttonText = "print"
   let printButton = true;
 
@@ -32,6 +31,7 @@
     }
 
     //This will set the zoom on the page.
+    let innerBody = document.getElementById("inner-body");
     if((window.innerWidth - 500) <= 8.5 * 96 && (window.innerWidth - 500) >= halfWidth) {
       let scale = 1 * ((window.innerWidth - 500) / (8.5 * 96));
       innerBody.style.transform = `scale(${scale})`;
@@ -203,22 +203,26 @@
 
 <main>
   <div id="main-area">
-    <div id="flip-switch" data-toggle="0" on:click="{()=>{
+    <div id="flip-switch" data-toggle="0" on:click="{(e)=>{
       let fs = document.getElementById("flip-switch");
+      let images = Array.from(fs.childNodes).filter((val)=>{return val.data != " "}); //Filter out the text elements.
+      
       if(parseInt(fs.getAttribute("data-toggle")) == 0) { 
         document.getElementById("editor").style.left = "-100vw";
-        if(window.innerWidth > 500) {
+        if(window.innerWidth > 550) {
           fs.style.left = "0px";
           document.getElementById("editor").style.boxShadow = "none";
+          images[0].style.display = "none";
         } else {
           fs.style.left = "-50px";
         }
         fs.setAttribute("data-toggle", "1")
       } else {
         document.getElementById("editor").style.left = "0vw";
-        if(window.innerWidth > 500) {
+        if(window.innerWidth > 550) {
           document.getElementById("editor").style.boxShadow = "0 0 0 50vw rgba(0,0,0,0.8)";
           fs.style.left = "500px";
+          images[0].style.display = "block";
         } else {
           fs.style.left = "calc(100vw - 50px)";
         }
@@ -245,6 +249,7 @@
         <hr>
 
         <BodyPart printButton="{printButton}" buttonText="{buttonText}"/>
+
       </div>
     </div>
 
@@ -296,7 +301,6 @@
         display:none;
       }
       #total-editor-block {
-        overflow:hidden;
         padding-top:10px;
         padding-bottom:30px;
         position:absolute;
@@ -309,7 +313,7 @@
         }
 
         hr {
-          width:400px;
+          width:480px;
           float:left;
           margin-left:10px;
         }
@@ -342,7 +346,33 @@
   @media only screen and (max-width:908px) and (min-width:551px) {
     #main-area {
 
-      
+      #flip-switch {
+        display:block;
+        height:50px;
+        width:50px;
+        position:fixed;
+        z-index:1000000000;
+        left:500px;
+        top:20px;
+        border-top-right-radius:8px;
+        border-bottom-right-radius:8px;
+        background-color:#fff;
+        overflow:hidden;
+
+        .images {
+          height:50px;
+          width:50px;
+          overflow:hidden;
+          position:relative;
+          
+          img {
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%, -50%);
+          }
+        }
+      }
 
       #editor {
         z-index:100000000;
@@ -373,7 +403,7 @@
         justify-content:space-between;
         flex-flow:row;
         flex-wrap:nowrap;
-        box-shadow:inset 0 0 0 2px #000;
+        box-shadow:0 0 5px rgba(0,0,0,0.3);
 
         .images {
           height:50px;
@@ -393,7 +423,6 @@
       #editor {
         width:100vw;
         z-index:100000000;
-        box-shadow:0 0 0 50vw rgba(0,0,0,0.8);
 
         #total-editor-block {
           width:96vw;
@@ -406,6 +435,7 @@
           hr {
             float:left;
             margin-left:0px;
+            width:96vw;
           }
         }
       }
@@ -413,6 +443,11 @@
       #preview {
         width:100vw;
         height:$height;
+
+        #inner-body {
+          padding:0px;
+          transform:scale(0.5);
+        }
       }
     }
   }

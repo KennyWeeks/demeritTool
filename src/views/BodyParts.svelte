@@ -9,6 +9,7 @@
 
 
     let inputList = {"name": ["text", "Your name ...", false], "date": ["date", "02/14/2023", false], "hr-number": ["text", "1111111...", false], "demerit-points": ["number", "1", false], "who-assigned-the-demerit": ["text", "Captain ....", false]}
+    let textAreaEmpty = false;
 
     onMount(async ()=>{
         //This will essentially set the time
@@ -89,7 +90,10 @@
        {/if}
     {/each}
 
-    <TextArea/>
+    <TextArea err="{textAreaEmpty}" on:focus="{(e)=>{
+        e.target.style.outline = "none";
+        textAreaEmpty = false;
+       }}"/>
 
     <Button printbutton="{printButton}" buttonText="{buttonText}" on:click="{()=>{
 
@@ -111,6 +115,7 @@
         if(textArea.value == "") {
             textArea.style.outline = "2px solid #ff0000";
             notComplete = true;
+            textAreaEmpty = true;
         }
 
         if(!notComplete) {
@@ -177,7 +182,7 @@
         margin-left:10px;
 
         hr {
-            width:400px;
+            width:480px;
             float:left;
         }
     }
@@ -186,6 +191,10 @@
         #editor-block {
             width:100%;
             margin-left:0px;
+
+            hr {
+                width:96vw;
+            }
         }
     }
 
