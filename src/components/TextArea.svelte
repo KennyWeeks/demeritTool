@@ -15,7 +15,7 @@
     }
 }} required></textarea>
 
-<style>
+<style lang="scss">
 
     label {
         margin-bottom:10px;
@@ -26,24 +26,24 @@
     textarea[name="textarea"] {
         border-radius:5px;
         resize:none;
-        width:465px;
         background-color:#fff;
         color:#000;
-        border:2px solid #000;
-        margin-top:5px;
+        box-shadow:inset 0 0 0 2px #000;
+        border:none;
+        width:calc(480px - 10px);
         font-size:18px;
         border-radius:0px;
         padding:5px;
         font-family:Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+        &:focus {
+            outline:none;
+        }
     }
 
-    textarea[name="textarea"]:focus {
-        outline:none;
-    }
-
-    @media only screen and (max-width:500px) {
+    @media only screen and (max-width:550px) {
         textarea[name="textarea"] {
-            width:calc(94vw - 5px);
+            width:calc(96vw - 10px);
         }
     }
 

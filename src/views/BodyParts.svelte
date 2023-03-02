@@ -61,7 +61,7 @@
 </script>
 
 <div id="editor-block">
-
+    <br>
     {#each Object.keys(inputList) as name}
        <Input err="{inputList[name][2]}" labelTag="{name.charAt(0).toUpperCase() + name.slice(1)}" type="{inputList[name][0]}" min="{inputList[name][1]}" def="{inputList[name][1]}" on:focus="{(e, x=name)=>{
         e.target.style.outline = "none";
@@ -170,17 +170,22 @@
 
 </div>
 
-<style>
+<style lang="scss">
 
     #editor-block {
         width:480px;
         margin-left:10px;
+
+        hr {
+            width:400px;
+            float:left;
+        }
     }
 
-    @media only screen and (max-width:500px) {
+    @media only screen and (max-width:550px) {
         #editor-block {
-            width:96vw;
-            margin-left:2vw;
+            width:100%;
+            margin-left:0px;
         }
     }
 

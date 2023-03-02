@@ -115,13 +115,4 @@ just copy the style strings over-->
         color:#000;
     }
 
-    @media only screen and (max-width:550px) {
-        #main-component {
-            transform:scale(0.5);
-            position:absolute;
-            left:-50%;
-            top:-50%;
-        }
-    }
-
 </style>
