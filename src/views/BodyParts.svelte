@@ -161,7 +161,23 @@
             }
 
             let mainContent = document.getElementById("main-component");
-            printCommand(mainContent);
+            if(printButton) {
+                printCommand(mainContent);
+            } else {
+                let editor = document.getElementById("editor");
+                let fs = document.getElementById("flip-switch");
+                editor.style.left = "-100vw";
+                fs.setAttribute("data-toggle", "1");
+                let images = Array.from(fs.childNodes).filter((val)=>{return val.data != " "}); //Filter out the text elements
+                if(window.innerWidth <= 550) {
+                    fs.style.left = "-50px";
+                } else {
+                    fs.style.left = "0px";
+                    images[0].style.display = "none";
+                    editor.style.boxShadow = "none";
+                }
+                
+            }
         } else {
             let editor = document.getElementById("editor");
             let teb = document.getElementById("total-editor-block");
