@@ -79,10 +79,13 @@
   
 </script>
 
-<!--<svelte:window on:resize="{()=>{
+<svelte:window on:resize="{()=>{
   let teb = document.getElementById("total-editor-block");
   let preview = document.getElementById("preview");
   let innerBody = document.getElementById("inner-body");
+  let editor = document.getElementById("editor");
+  let fs = document.getElementById("flip-switch");
+  let images = Array.from(fs.childNodes).filter((val)=>{return val.data != " "}); //Filter out the text elements.
 
   //This will position the editor block into the center of the screen
   if(window.innerHeight <= teb.offsetHeight) {
@@ -102,14 +105,37 @@
     printButton = true;
     buttonText = "Print";
 
-  } else if(((window.innerWidth - 500) < halfWidth) || ((window.innerWidth - 500) > 8.5*96)) {
-    if((window.innerWidth - 500) < halfWidth) {
-      buttonText = "Preview";
-      printButton = false;
+    editor.removeAttribute("style");
+    fs.setAttribute("data-toggle", "0");
+    fs.style.left = "500px";
+    
+    images[0].style.display = "block";
+
+
+  } else if(((window.innerWidth - 500) < halfWidth)) {
+    buttonText = "Preview";
+    printButton = false;
+
+    if(window.innerWidth <= 550) {
+      editor.style.boxShadow = "none";
+      innerBody.removeAttribute("style");
+      fs.removeAttribute("style");
+      if(fs.getAttribute("data-toggle") == "1") {
+        images[0].style.display = "block";
+        fs.style.left = "-50px";
+      }
+    } else {
+      innerBody.style.transform = "scale(1.0)";
+      if(fs.getAttribute("data-toggle") == "1") {
+        images[0].style.display = "none";
+        fs.style.left = "0px";
+        editor.style.boxShadow = "none";
+      } else {
+        editor.style.boxShadow = "0 0 0 50vw rgba(0,0,0,0.8)";
+      }
     }
-    innerBody.style.transform = "scale(1.0)";
   }
-}}"/>-->
+}}"/>
 
 <!--<svelte:window on:load="{()=>{
   let mobileCh = window.mobileCheck();
@@ -449,6 +475,7 @@
         #inner-body {
           padding:0px;
           transform:scale(0.5);
+          margin-left:-50%;
         }
       }
     }
