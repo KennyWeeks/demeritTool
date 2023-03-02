@@ -42,7 +42,7 @@
   const printCommand = (mc) =>  {
     let mobileChk = mobileCheck();
     console.log(mobileChk);
-    let newWindow = window.open("", "PRINT", `height=${8.5*96}px, width=${11*96}px`);
+    let newWindow = window.open("", "PRINT", `height=${11*96}px, width=${8.5*96}px`);
     if(mobileChk) {
       newWindow.print()
     }
@@ -284,6 +284,7 @@
     <div id="preview">
 
       <Button view={true} printbutton={true} buttonText="Print" on:click="{()=>{
+        console.log("WHAT");
         let mainContent = document.getElementById("main-component");
         printCommand(mainContent);
       }}"/>
@@ -358,6 +359,10 @@
       top:0px;
       overflow:scroll;
       scrollbar-width:none;
+
+      button {
+        z-index:1000000000000000;
+      }
 
       ::-webkit-scrollbar {
         display:none;

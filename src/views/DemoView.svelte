@@ -1,4 +1,8 @@
-<script></script>
+<script>
+
+    import image from "../assets/header.png";
+
+</script>
 
 <!--The reason I am making everything inline styled is because
 the printing process of these pages will not carry the styles over, and 
@@ -24,7 +28,7 @@ just copy the style strings over-->
             margin-left:calc(1*96px);
             border:2px solid #000;-->
 
-    <img src="/header.png" style="margin-top:96px; margin-left:96px;" alt="Fire Academy Header"/>
+    <img src="{image}" style="margin-top:96px; margin-left:96px;" alt="Fire Academy Header"/>
 
     <!--width:calc(6.5*96px);
             border-bottom:3px solid #000;
