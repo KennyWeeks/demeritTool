@@ -24,6 +24,18 @@
       teb.style.top = "50%";
       teb.style.transform = "translateY(-50%)";
     }
+
+    //This will set the button on load
+    if(window.innerWidth - 500 <= halfWidth) {
+      buttonText = "preview";
+      printButton = false;
+    }
+
+    //This will set the zoom on the page.
+    if((window.innerWidth - 500) <= 8.5 * 96 && (window.innerWidth - 500) >= halfWidth) {
+      let scale = 1 * ((window.innerWidth - 500) / (8.5 * 96));
+      innerBody.style.transform = `scale(${scale})`;
+    }
   });
 
   const printCommand = (mc) =>  {
