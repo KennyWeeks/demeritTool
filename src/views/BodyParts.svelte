@@ -191,6 +191,7 @@
         #editor-block {
             width:100%;
             margin-left:0px;
+            padding-bottom:120px;
 
             hr {
                 width:96vw;
